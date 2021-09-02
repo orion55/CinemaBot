@@ -5,7 +5,10 @@ namespace CinemaBot.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        // public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){}
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+            
+        }
 
         public DbSet<Url> Urls { get; set; }
         
@@ -23,7 +26,7 @@ namespace CinemaBot.Data
         
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=cinemadb;Username=postgres;Password=root");
+            // optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=cinemadb;Username=postgres;Password=root");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
