@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using CinemaBot.Configurations;
 using CinemaBot.Data;
 using CinemaBot.Services;
 using Hangfire;
@@ -11,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using HangfireBasicAuthenticationFilter;
 
 namespace CinemaBot
 {
@@ -44,9 +44,10 @@ namespace CinemaBot
             GlobalConfiguration.Configuration
                 .UsePostgreSqlStorage(_configuration.GetConnectionString("DefaultConnection"))
                 .WithJobExpirationTimeout(TimeSpan.FromDays(7));
+            services.AddHangfireServer();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IBackgroundJobClient backgroundJobClient)
         {
             if (env.IsDevelopment())
             {
@@ -57,11 +58,14 @@ namespace CinemaBot
             {
                 Authorization = new[]
                 {
-                    new HangfireCustomBasicAuthenticationFilter
+                    new DashboardAuthorization(new[]
                     {
-                        User = _configuration.GetSection("HangfireCredentials:UserName").Value,
-                        Pass = _configuration.GetSection("HangfireCredentials:Password").Value
-                    }
+                        new HangfireUserCredentials
+                        {
+                            Username = _configuration.GetSection("HangfireCredentials:UserName").Value,
+                            Password = _configuration.GetSection("HangfireCredentials:Password").Value
+                        }
+                    })
                 }
             };
             app.UseHangfireDashboard("/hangfire", options);
@@ -73,6 +77,9 @@ namespace CinemaBot
             {
                 endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
             });
+            
+            backgroundJobClient.Enqueue(() => jobscheduler.Run());
+            // recurringJobManager.AddOrUpdate("Insert Employee : Runs Every 30 Sec", () => jobscheduler.Run(), "*/30 * * * * *");
         }
     }
 }
