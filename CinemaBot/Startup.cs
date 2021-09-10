@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using CinemaBot.Configurations;
 using CinemaBot.Data;
@@ -12,6 +13,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NpgsqlTypes;
+using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.PostgreSQL;
 
 namespace CinemaBot
 {
@@ -69,7 +74,30 @@ namespace CinemaBot
                 }
             };
             app.UseHangfireDashboard("/hangfire", options);
-            app.UseHangfireServer();
+            // app.UseHangfireServer();
+            
+            string tableName = "logs";
+
+            IDictionary<string, ColumnWriterBase> columnWriters = new Dictionary<string, ColumnWriterBase>
+            {
+                {"message", new RenderedMessageColumnWriter(NpgsqlDbType.Text) },
+                {"message_template", new MessageTemplateColumnWriter(NpgsqlDbType.Text) },
+                {"level", new LevelColumnWriter(true, NpgsqlDbType.Varchar) },
+                {"raise_date", new TimestampColumnWriter(NpgsqlDbType.Timestamp) },
+                {"exception", new ExceptionColumnWriter(NpgsqlDbType.Text) },
+                {"properties", new LogEventSerializedColumnWriter(NpgsqlDbType.Jsonb) },
+                {"props_test", new PropertiesColumnWriter(NpgsqlDbType.Jsonb) },
+                {"machine_name", new SinglePropertyColumnWriter("MachineName", PropertyWriteMethod.ToString, NpgsqlDbType.Text, "l") }
+            };
+
+            string connectionstring = _configuration.GetConnectionString("DefaultConnection");
+            
+            var logger = new LoggerConfiguration()
+                .WriteTo.PostgreSQL(connectionstring, tableName, columnWriters, LogEventLevel.Information, 
+                    null, null, 30, null, true,"",true,false)
+                .CreateLogger();
+
+            logger.Information("Start...");            
 
             app.UseRouting();
 
