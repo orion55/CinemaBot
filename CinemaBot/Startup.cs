@@ -23,7 +23,7 @@ namespace CinemaBot
     public class Startup
     {
         private readonly IConfiguration _configuration;
-        private readonly Job jobscheduler = new Job();
+        public ILogger Logger { get; }
 
         public Startup()
         {
@@ -33,11 +33,35 @@ namespace CinemaBot
 
             _configuration = builder.Build();
             // Console.WriteLine(string.Join("\n", this.configuration.GetSection("urls").Get<string[]>()));
+            
+            string tableName = "logs";
+
+            IDictionary<string, ColumnWriterBase> columnWriters = new Dictionary<string, ColumnWriterBase>
+            {
+                {"message", new RenderedMessageColumnWriter(NpgsqlDbType.Text) },
+                {"message_template", new MessageTemplateColumnWriter(NpgsqlDbType.Text) },
+                {"level", new LevelColumnWriter(true, NpgsqlDbType.Varchar) },
+                {"raise_date", new TimestampColumnWriter(NpgsqlDbType.Timestamp) },
+                {"exception", new ExceptionColumnWriter(NpgsqlDbType.Text) },
+                {"properties", new LogEventSerializedColumnWriter(NpgsqlDbType.Jsonb) },
+                {"props_test", new PropertiesColumnWriter(NpgsqlDbType.Jsonb) },
+                {"machine_name", new SinglePropertyColumnWriter("MachineName", PropertyWriteMethod.ToString, NpgsqlDbType.Text, "l") }
+            };
+
+            string connectionstring = _configuration.GetConnectionString("DefaultConnection");
+            
+            Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .WriteTo.Console()
+                .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.PostgreSQL(connectionstring, tableName, columnWriters, LogEventLevel.Information, 
+                    null, null, 30, null, true,"",true,false)
+                .CreateLogger();
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IConfiguration>(provider => _configuration);
+            services.AddTransient(provider => _configuration);
 
             services.AddTransient<ParserService>();
 
@@ -50,6 +74,8 @@ namespace CinemaBot
                 .UsePostgreSqlStorage(_configuration.GetConnectionString("DefaultConnection"))
                 .WithJobExpirationTimeout(TimeSpan.FromDays(7));
             services.AddHangfireServer();
+            
+            services.AddSingleton<ILogger>(Logger);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IBackgroundJobClient backgroundJobClient)
@@ -74,31 +100,7 @@ namespace CinemaBot
                 }
             };
             app.UseHangfireDashboard("/hangfire", options);
-            // app.UseHangfireServer();
             
-            string tableName = "logs";
-
-            IDictionary<string, ColumnWriterBase> columnWriters = new Dictionary<string, ColumnWriterBase>
-            {
-                {"message", new RenderedMessageColumnWriter(NpgsqlDbType.Text) },
-                {"message_template", new MessageTemplateColumnWriter(NpgsqlDbType.Text) },
-                {"level", new LevelColumnWriter(true, NpgsqlDbType.Varchar) },
-                {"raise_date", new TimestampColumnWriter(NpgsqlDbType.Timestamp) },
-                {"exception", new ExceptionColumnWriter(NpgsqlDbType.Text) },
-                {"properties", new LogEventSerializedColumnWriter(NpgsqlDbType.Jsonb) },
-                {"props_test", new PropertiesColumnWriter(NpgsqlDbType.Jsonb) },
-                {"machine_name", new SinglePropertyColumnWriter("MachineName", PropertyWriteMethod.ToString, NpgsqlDbType.Text, "l") }
-            };
-
-            string connectionstring = _configuration.GetConnectionString("DefaultConnection");
-            
-            var logger = new LoggerConfiguration()
-                .WriteTo.PostgreSQL(connectionstring, tableName, columnWriters, LogEventLevel.Information, 
-                    null, null, 30, null, true,"",true,false)
-                .CreateLogger();
-
-            logger.Information("Start...");            
-
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
@@ -106,6 +108,7 @@ namespace CinemaBot
                 endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
             });
             
+            Job jobscheduler = new Job(Logger);
             backgroundJobClient.Enqueue(() => jobscheduler.Run());
             // recurringJobManager.AddOrUpdate("Insert Employee : Runs Every 30 Sec", () => jobscheduler.Run(), "*/30 * * * * *");
         }
