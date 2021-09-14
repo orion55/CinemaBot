@@ -4,6 +4,8 @@ using System.IO;
 using CinemaBot.Configurations;
 using CinemaBot.Data;
 using CinemaBot.Services;
+using CinemaBot.Services.Interfaces;
+using CinemaBot.Services.Services;
 using Hangfire;
 using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Builder;
@@ -63,7 +65,7 @@ namespace CinemaBot
         {
             services.AddTransient(provider => _configuration);
 
-            services.AddTransient<ParserService>();
+            services.AddTransient<IParserService>(s => new ParserService(Logger));
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
@@ -75,10 +77,11 @@ namespace CinemaBot
                 .WithJobExpirationTimeout(TimeSpan.FromDays(7));
             services.AddHangfireServer();
             
-            services.AddSingleton<ILogger>(Logger);
+            services.AddSingleton(Logger);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IBackgroundJobClient backgroundJobClient)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IBackgroundJobClient backgroundJobClient, 
+            IParserService parserService)
         {
             if (env.IsDevelopment())
             {
@@ -108,7 +111,7 @@ namespace CinemaBot
                 endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
             });
             
-            Job jobscheduler = new Job(Logger);
+            Job jobscheduler = new Job(Logger, _configuration, parserService);
             backgroundJobClient.Enqueue(() => jobscheduler.Run());
             // recurringJobManager.AddOrUpdate("Insert Employee : Runs Every 30 Sec", () => jobscheduler.Run(), "*/30 * * * * *");
         }
