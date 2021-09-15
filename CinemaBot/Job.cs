@@ -22,7 +22,14 @@ namespace CinemaBot
         {
             _logger.Information("Parsing started");
             string[] urls = _config.GetSection("urls").Get<string[]>();
-            _parser.Parser(urls[0]);
+            try
+            {
+                _parser.Parser(urls[0]);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, ex.Message);
+            }
         }
     }
 }

@@ -19,6 +19,7 @@ using NpgsqlTypes;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.PostgreSQL;
+using Serilog.Sinks.SystemConsole.Themes;
 
 namespace CinemaBot
 {
@@ -54,7 +55,7 @@ namespace CinemaBot
             
             Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
-                .WriteTo.Console()
+                .WriteTo.Console(theme: AnsiConsoleTheme.Literate)
                 .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
                 .WriteTo.PostgreSQL(connectionstring, tableName, columnWriters, LogEventLevel.Information, 
                     null, null, 30, null, true,"",true,false)
