@@ -22,9 +22,9 @@ namespace CinemaBot.Services.Services
 
             _log.Information("Parse url: {0}", url);
 
-            string RefURL = "https://2ip.ru/";
-            string myProxyIP = "164.132.45.150"; //check this is still available
-            int myPort = 3128;
+            string RefURL = "https://nnmclub.to/forum/viewforum.php?f=319";
+            string myProxyIP = "31.40.253.129"; //check this is still available
+            int myPort = 8085;
             string userId = string.Empty; //leave it blank
             string password = string.Empty;
             try

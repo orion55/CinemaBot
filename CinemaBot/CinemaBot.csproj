@@ -26,4 +26,13 @@
       <ProjectReference Include="..\CinemaBot.Services\CinemaBot.Services.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="proxy_http_ip.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="proxy.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>

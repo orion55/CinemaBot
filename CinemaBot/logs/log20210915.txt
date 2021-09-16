@@ -86,3 +86,6 @@ System.Net.WebException: Подключение не установлено, т.
 2021-09-15 09:58:47.170 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
 2021-09-15 09:59:33.569 +05:00 [INF] Parsing started
 2021-09-15 09:59:33.703 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-09-15 10:11:13.219 +05:00 [INF] Parsing started
+2021-09-15 10:11:13.362 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-09-15 10:11:16.134 +05:00 [ERR] Подключение не установлено, т.к. конечный компьютер отверг запрос на подключение. [::ffff:188.186.157.49]:443 (nnmclub.to:443)
