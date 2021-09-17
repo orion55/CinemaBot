@@ -26,7 +26,7 @@ namespace CinemaBot
     public class Startup
     {
         private readonly IConfiguration _configuration;
-        public ILogger Logger { get; }
+        public ILogger _logger { get; }
 
         public Startup()
         {
@@ -53,7 +53,7 @@ namespace CinemaBot
 
             string connectionstring = _configuration.GetConnectionString("DefaultConnection");
             
-            Logger = new LoggerConfiguration()
+            _logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .WriteTo.Console(theme: AnsiConsoleTheme.Literate)
                 .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
@@ -66,7 +66,7 @@ namespace CinemaBot
         {
             services.AddTransient(provider => _configuration);
 
-            services.AddTransient<IParserService>(s => new ParserService(Logger));
+            services.AddTransient<IParserService>(s => new ParserService(_logger, _configuration));
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
@@ -78,7 +78,7 @@ namespace CinemaBot
                 .WithJobExpirationTimeout(TimeSpan.FromDays(7));
             services.AddHangfireServer();
             
-            services.AddSingleton(Logger);
+            services.AddSingleton(_logger);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IBackgroundJobClient backgroundJobClient, 
@@ -112,7 +112,7 @@ namespace CinemaBot
                 endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
             });
             
-            Job jobscheduler = new Job(Logger, _configuration, parserService);
+            Job jobscheduler = new Job(_logger, _configuration, parserService);
             backgroundJobClient.Enqueue(() => jobscheduler.Run());
             // recurringJobManager.AddOrUpdate("Insert Employee : Runs Every 30 Sec", () => jobscheduler.Run(), "*/30 * * * * *");
         }

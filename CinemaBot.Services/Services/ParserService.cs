@@ -3,16 +3,19 @@ using System.Net;
 using CinemaBot.Services.Interfaces;
 using Serilog;
 using HtmlAgilityPack;
+using Microsoft.Extensions.Configuration;
 
 namespace CinemaBot.Services.Services
 {
     public class ParserService: IParserService
     {
         private readonly ILogger _log;
+        private readonly IConfiguration _configuration;
 
-        public ParserService(ILogger log)
+        public ParserService(ILogger log, IConfiguration configuration)
         {
             _log = log;
+            _configuration = configuration;
         }
 
         public void Parser(string url)
@@ -22,7 +25,13 @@ namespace CinemaBot.Services.Services
 
             _log.Information("Parse url: {0}", url);
 
-            string RefURL = "https://nnmclub.to/forum/viewforum.php?f=319";
+            Boolean useProxy = Convert.ToBoolean(_configuration["useProxy"]);
+            if (useProxy)
+            {
+                ProxyService proxy = new ProxyService();
+            }
+
+            /*string RefURL = "https://nnmclub.to/forum/viewforum.php?f=319";
             string myProxyIP = "31.40.253.129"; //check this is still available
             int myPort = 8085;
             string userId = string.Empty; //leave it blank
@@ -36,7 +45,7 @@ namespace CinemaBot.Services.Services
             catch (WebException ex)
             {
                 _log.Error(ex.Message);
-            }
+            }*/
         }
     }
 }
