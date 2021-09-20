@@ -1,18 +1,18 @@
-﻿namespace CinemaBot.Services.Services
+﻿using System;
+
+namespace CinemaBot.Services.Services
 {
     public class Proxy
     {
-        string proxyHost;
-        int proxyPort;
-        string userId;
-        string password;
-
-        public Proxy(string proxyHost, int proxyPort, string userId, string password)
+        public Guid Id { get; set; }
+        public string ProxyHost { get; set; }
+        public int ProxyPort { get; set; }
+        public string UserId { get; set; }
+        public string Password { get; set; }
+        public bool IsBad { get; set; }
+        public override string ToString()
         {
-            this.proxyHost = proxyHost;
-            this.proxyPort = proxyPort;
-            this.userId = userId;
-            this.password = password;
+            return string.Join(':', ProxyHost, Convert.ToString(ProxyPort), UserId, Password);
         }
     }
 }

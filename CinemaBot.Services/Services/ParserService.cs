@@ -28,7 +28,12 @@ namespace CinemaBot.Services.Services
             Boolean useProxy = Convert.ToBoolean(_configuration["useProxy"]);
             if (useProxy)
             {
-                ProxyService proxy = new ProxyService();
+                ProxyService serviceProxy = new ProxyService();
+                Proxy proxy = serviceProxy.GetRandomProxy();
+                Console.WriteLine(proxy);
+                serviceProxy.SetBadProxy(proxy.Id);
+                serviceProxy.SaveProxy();
+                
             }
 
             /*string RefURL = "https://nnmclub.to/forum/viewforum.php?f=319";
