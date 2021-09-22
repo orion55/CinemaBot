@@ -48,14 +48,14 @@ namespace CinemaBot.Data.Repositories
         }
 
         public async Task<List<TEntity>> FindAllByWhereOrderedAscendingAsync(
-            Expression<Func<TEntity, bool>> match, 
+            Expression<Func<TEntity, bool>> match,
             Expression<Func<TEntity, object>> orderBy)
         {
             return await context.Set<TEntity>().Where(match).OrderBy(orderBy).ToListAsync();
         }
 
         public async Task<List<TEntity>> FindAllByWhereOrderedDescendingAsync(
-            Expression<Func<TEntity, bool>> match, 
+            Expression<Func<TEntity, bool>> match,
             Expression<Func<TEntity, object>> orderBy)
         {
             return await context.Set<TEntity>().Where(match).OrderByDescending(orderBy).ToListAsync();

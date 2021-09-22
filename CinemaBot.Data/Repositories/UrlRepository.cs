@@ -7,7 +7,7 @@ namespace CinemaBot.Data.Repositories
     {
         // ReSharper disable once NotAccessedField.Local
         private readonly ApplicationDbContext context;
-        
+
         public UrlRepository(ApplicationDbContext context) : base(context)
         {
             this.context = context;

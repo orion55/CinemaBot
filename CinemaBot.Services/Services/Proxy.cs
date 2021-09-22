@@ -10,9 +10,13 @@ namespace CinemaBot.Services.Services
         public string UserId { get; set; }
         public string Password { get; set; }
         public bool IsBad { get; set; }
+
         public override string ToString()
         {
-            return string.Join(':', ProxyHost, Convert.ToString(ProxyPort), UserId, Password);
+            string result = ProxyHost + ":" + Convert.ToString(ProxyPort);
+            if (!String.IsNullOrEmpty(UserId) && !String.IsNullOrEmpty(Password))
+                result += ":" + UserId + ":" + Password;
+            return result;
         }
     }
 }

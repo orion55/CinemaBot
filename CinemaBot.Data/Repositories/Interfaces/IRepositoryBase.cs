@@ -11,9 +11,11 @@ namespace CinemaBot.Data.Repositories.Interfaces
 
         Task<List<TEntity>> FindAllByWhereAsync(Expression<Func<TEntity, bool>> match);
 
-        Task<List<TEntity>> FindAllByWhereOrderedAscendingAsync(Expression<Func<TEntity, bool>> match, Expression<Func<TEntity, object>> orderBy);
+        Task<List<TEntity>> FindAllByWhereOrderedAscendingAsync(Expression<Func<TEntity, bool>> match,
+            Expression<Func<TEntity, object>> orderBy);
 
-        Task<List<TEntity>> FindAllByWhereOrderedDescendingAsync(Expression<Func<TEntity, bool>> match, Expression<Func<TEntity, object>> orderBy);
+        Task<List<TEntity>> FindAllByWhereOrderedDescendingAsync(Expression<Func<TEntity, bool>> match,
+            Expression<Func<TEntity, object>> orderBy);
 
         Task<List<TEntity>> GetAllAsync();
 
