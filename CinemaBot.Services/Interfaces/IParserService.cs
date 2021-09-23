@@ -2,6 +2,6 @@
 {
     public interface IParserService
     {
-        void Parser(string url);
+        void MainPageParser(string url);
     }
 }

@@ -1,66 +1,95 @@
 ﻿using System;
 using System.Net;
 using CinemaBot.Services.Interfaces;
-using Serilog;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
+using Serilog;
 
 namespace CinemaBot.Services.Services
 {
     public class ParserService : IParserService
     {
         private readonly ILogger _log;
-        private readonly IConfiguration _configuration;
+        private readonly bool _useProxy;
+        private readonly ProxyService _serviceProxy;
+        private Proxy _currentProxy;
+        private string[] _items;
 
         public ParserService(ILogger log, IConfiguration configuration)
         {
             _log = log;
-            _configuration = configuration;
+
+            _useProxy = Convert.ToBoolean(configuration["useProxy"]);
+
+            if (_useProxy)
+            {
+                _serviceProxy = new ProxyService();
+                _currentProxy = _serviceProxy.GetRandomProxy() ?? throw new Exception("The proxy list is empty");
+            }
         }
 
-        public void Parser(string url)
+        public void MainPageParser(string url)
         {
             if (String.IsNullOrEmpty(url))
                 throw new Exception("The \"url\" value is empty");
 
             _log.Information("Parse url: {0}", url);
 
-            bool useProxy = Convert.ToBoolean(_configuration["useProxy"]);
-
-            ProxyService serviceProxy = new ProxyService();
-
             int i = 0;
             bool isStarting = false;
             do
             {
-                Proxy proxy = serviceProxy.GetRandomProxy() ?? throw new Exception("The proxy list is empty");
                 try
                 {
                     HtmlWeb web = new HtmlWeb();
-                    var doc = useProxy
-                        ? web.Load(url, proxy.ProxyHost, proxy.ProxyPort, proxy.UserId, proxy.Password)
+
+                    var doc = _useProxy
+                        ? web.Load(url, _currentProxy.ProxyHost, _currentProxy.ProxyPort, _currentProxy.UserId,
+                            _currentProxy.Password)
                         : web.Load(url);
-                    // Console.WriteLine(doc.DocumentNode.InnerHtml);
+
+                    var nodes = doc.DocumentNode.SelectNodes("//a[@class='topictitle']");
+
+                    int count = nodes.Count;
+                    if (count > 0)
+                    {
+                        _items = new string[count];
+
+                        for (int j = 0; j < count; j++)
+                        {
+                            _items[j] = nodes[j].InnerText;
+                            // _items[j] = nodes[j].Attributes["href"].Value;
+                        }
+
+                        Console.WriteLine("Result: {0}", String.Join(", ", _items));
+                    }
+                    else
+                    {
+                        throw new Exception("The parsing result is empty");
+                    }
                 }
                 catch (WebException ex)
                 {
-                    if (useProxy)
+                    if (_useProxy)
                     {
                         i++;
-                        serviceProxy.SetBadProxy(proxy.Id);
+                        _serviceProxy.SetBadProxy(_currentProxy.Id);
                         isStarting = true;
-                        if (i == serviceProxy.Count)
+                        if (i == _serviceProxy.Count)
                         {
-                            serviceProxy.SaveProxy();
+                            _serviceProxy.SaveProxy();
                             throw new Exception("Link " + url + " loading failed");
                         }
+
+                        _currentProxy = _serviceProxy.GetRandomProxy() ??
+                                        throw new Exception("The proxy list is empty");
                     }
 
                     _log.Error(ex.Message);
                 }
             } while (isStarting);
 
-            if (useProxy) serviceProxy.SaveProxy();
+            if (_useProxy) _serviceProxy.SaveProxy();
         }
     }
 }
