@@ -1,25 +1,32 @@
 ﻿using System;
 using System.Net;
+using System.Text;
+using System.Web;
 using CinemaBot.Services.Interfaces;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
 using Serilog;
+using static System.Convert;
 
 namespace CinemaBot.Services.Services
 {
     public class ParserService : IParserService
     {
+        const string NnmClub = "https://nnmclub.to/forum/";
+        
         private readonly ILogger _log;
         private readonly bool _useProxy;
         private readonly ProxyService _serviceProxy;
         private Proxy _currentProxy;
-        private string[] _items;
+        private int[] _items;
 
         public ParserService(ILogger log, IConfiguration configuration)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             _log = log;
 
-            _useProxy = Convert.ToBoolean(configuration["useProxy"]);
+            _useProxy = ToBoolean(configuration["useProxy"]);
 
             if (_useProxy)
             {
@@ -53,12 +60,13 @@ namespace CinemaBot.Services.Services
                     int count = nodes.Count;
                     if (count > 0)
                     {
-                        _items = new string[count];
+                        _items = new int[count];
 
                         for (int j = 0; j < count; j++)
                         {
-                            _items[j] = nodes[j].InnerText;
-                            // _items[j] = nodes[j].Attributes["href"].Value;
+                            // _items[j] = DecodeText(nodes[j].InnerText);
+                            // _items[j] = nodes[j].InnerText;
+                            _items[j] = GetParamFromUrl(nodes[j].Attributes["href"].Value);
                         }
 
                         Console.WriteLine("Result: {0}", String.Join(", ", _items));
@@ -90,6 +98,22 @@ namespace CinemaBot.Services.Services
             } while (isStarting);
 
             if (_useProxy) _serviceProxy.SaveProxy();
+        }
+
+        private string DecodeText(string text)
+        {
+            var encFrom = Encoding.GetEncoding("windows-1251");
+            var encTo = Encoding.GetEncoding("utf-8");
+            byte[] bytes = encFrom.GetBytes(text);
+            bytes = Encoding.Convert(encFrom, encTo, bytes);
+            return encTo.GetString(bytes);
+        }
+
+        private int GetParamFromUrl(string url)
+        {
+            Uri myUri = new Uri(NnmClub + url);
+            string param = HttpUtility.ParseQueryString(myUri.Query).Get("t");
+            return ToInt32(param);
         }
     }
 }

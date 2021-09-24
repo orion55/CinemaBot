@@ -8,6 +8,7 @@
       <PackageReference Include="HtmlAgilityPack" Version="1.11.36" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
       <PackageReference Include="Serilog" Version="2.10.0" />
+      <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
     </ItemGroup>
 
 </Project>
