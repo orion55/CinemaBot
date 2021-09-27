@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
@@ -13,12 +14,12 @@ namespace CinemaBot.Services.Services
     public class ParserService : IParserService
     {
         const string NnmClub = "https://nnmclub.to/forum/";
-        
+
         private readonly ILogger _log;
         private readonly bool _useProxy;
         private readonly ProxyService _serviceProxy;
         private Proxy _currentProxy;
-        private int[] _items;
+        private readonly int[] _exceptionIds;
 
         public ParserService(ILogger log, IConfiguration configuration)
         {
@@ -27,6 +28,7 @@ namespace CinemaBot.Services.Services
             _log = log;
 
             _useProxy = ToBoolean(configuration["useProxy"]);
+            _exceptionIds = configuration.GetSection("exceptionIds").Get<int[]>();
 
             if (_useProxy)
             {
@@ -60,16 +62,17 @@ namespace CinemaBot.Services.Services
                     int count = nodes.Count;
                     if (count > 0)
                     {
-                        _items = new int[count];
+                        int[] ids = new int[count];
 
                         for (int j = 0; j < count; j++)
                         {
                             // _items[j] = DecodeText(nodes[j].InnerText);
                             // _items[j] = nodes[j].InnerText;
-                            _items[j] = GetParamFromUrl(nodes[j].Attributes["href"].Value);
+                            ids[j] = GetParamFromUrl(nodes[j].Attributes["href"].Value);
                         }
 
-                        Console.WriteLine("Result: {0}", String.Join(", ", _items));
+                        ids = ids.Except(_exceptionIds).ToArray();
+                        SecondPagesParser(ids);
                     }
                     else
                     {
@@ -82,6 +85,7 @@ namespace CinemaBot.Services.Services
                     {
                         i++;
                         _serviceProxy.SetBadProxy(_currentProxy.Id);
+                        _log.Error(_currentProxy.ProxyHost + " is bad");
                         isStarting = true;
                         if (i == _serviceProxy.Count)
                         {
@@ -98,6 +102,13 @@ namespace CinemaBot.Services.Services
             } while (isStarting);
 
             if (_useProxy) _serviceProxy.SaveProxy();
+        }
+
+        private void SecondPagesParser(int[] ids)
+        {
+            if (ids == null || ids.Length == 0)
+                throw new Exception("The array of ids is empty");
+            Console.WriteLine("ids: {0}", String.Join(", ", ids));
         }
 
         private string DecodeText(string text)
