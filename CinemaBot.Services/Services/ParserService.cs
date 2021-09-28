@@ -14,6 +14,7 @@ namespace CinemaBot.Services.Services
     public class ParserService : IParserService
     {
         const string NnmClub = "https://nnmclub.to/forum/";
+        const string NnmClubTopic = NnmClub + "viewtopic.php";
 
         private readonly ILogger _log;
         private readonly bool _useProxy;
@@ -109,6 +110,17 @@ namespace CinemaBot.Services.Services
             if (ids == null || ids.Length == 0)
                 throw new Exception("The array of ids is empty");
             Console.WriteLine("ids: {0}", String.Join(", ", ids));
+
+            HtmlWeb web = new HtmlWeb();
+
+            var url = NnmClubTopic + "?t=" + Convert.ToString(ids[0]);
+            var doc = _useProxy
+                ? web.Load(url, _currentProxy.ProxyHost, _currentProxy.ProxyPort, _currentProxy.UserId,
+                    _currentProxy.Password)
+                : web.Load(url);
+            string title = doc.DocumentNode.SelectSingleNode("//a[@class='maintitle']").InnerText;
+            string imgUrl = doc.DocumentNode.SelectSingleNode("//meta[@property='og:image']").Attributes["content"]
+                .Value;
         }
 
         private string DecodeText(string text)
