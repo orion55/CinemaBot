@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaBot.Services", "Cinem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaBot.Models", "CinemaBot.Models\CinemaBot.Models.csproj", "{8C67B315-D79E-4BFD-AF0D-B31083D19537}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaBot.Core", "CinemaBot.Core\CinemaBot.Core.csproj", "{F755DC38-AEF1-421F-B181-1ED90A54657E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{8C67B315-D79E-4BFD-AF0D-B31083D19537}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C67B315-D79E-4BFD-AF0D-B31083D19537}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C67B315-D79E-4BFD-AF0D-B31083D19537}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F755DC38-AEF1-421F-B181-1ED90A54657E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F755DC38-AEF1-421F-B181-1ED90A54657E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F755DC38-AEF1-421F-B181-1ED90A54657E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F755DC38-AEF1-421F-B181-1ED90A54657E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

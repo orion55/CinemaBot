@@ -3,6 +3,8 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
+using CinemaBot.Core;
+using CinemaBot.Models;
 using CinemaBot.Services.Interfaces;
 using HtmlAgilityPack;
 using Microsoft.Extensions.Configuration;
@@ -13,9 +15,6 @@ namespace CinemaBot.Services.Services
 {
     public class ParserService : IParserService
     {
-        const string NnmClub = "https://nnmclub.to/forum/";
-        const string NnmClubTopic = NnmClub + "viewtopic.php";
-
         private readonly ILogger _log;
         private readonly bool _useProxy;
         private readonly ProxyService _serviceProxy;
@@ -111,9 +110,14 @@ namespace CinemaBot.Services.Services
                 throw new Exception("The array of ids is empty");
             Console.WriteLine("ids: {0}", String.Join(", ", ids));
 
+            Console.WriteLine(GetUrl(ids[0]));
+        }
+
+        private UrlModel GetUrl(int id)
+        {
             HtmlWeb web = new HtmlWeb();
 
-            var url = NnmClubTopic + "?t=" + Convert.ToString(ids[0]);
+            var url = Constants.NnmClubTopic + "?t=" + Convert.ToString(id);
             var doc = _useProxy
                 ? web.Load(url, _currentProxy.ProxyHost, _currentProxy.ProxyPort, _currentProxy.UserId,
                     _currentProxy.Password)
@@ -121,6 +125,8 @@ namespace CinemaBot.Services.Services
             string title = doc.DocumentNode.SelectSingleNode("//a[@class='maintitle']").InnerText;
             string imgUrl = doc.DocumentNode.SelectSingleNode("//meta[@property='og:image']").Attributes["content"]
                 .Value;
+
+            return new UrlModel(id, title, imgUrl);
         }
 
         private string DecodeText(string text)
@@ -134,7 +140,7 @@ namespace CinemaBot.Services.Services
 
         private int GetParamFromUrl(string url)
         {
-            Uri myUri = new Uri(NnmClub + url);
+            Uri myUri = new Uri(Constants.NnmClub + url);
             string param = HttpUtility.ParseQueryString(myUri.Query).Get("t");
             return ToInt32(param);
         }

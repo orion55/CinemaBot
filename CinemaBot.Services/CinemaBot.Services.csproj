@@ -12,4 +12,9 @@
       <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\CinemaBot.Core\CinemaBot.Core.csproj" />
+      <ProjectReference Include="..\CinemaBot.Models\CinemaBot.Models.csproj" />
+    </ItemGroup>
+
 </Project>
