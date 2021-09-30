@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using CinemaBot.Core;
 using CinemaBot.Models;
@@ -104,29 +106,55 @@ namespace CinemaBot.Services.Services
             if (_useProxy) _serviceProxy.SaveProxy();
         }
 
-        private void SecondPagesParser(int[] ids)
+        private async void SecondPagesParser(int[] ids)
         {
             if (ids == null || ids.Length == 0)
                 throw new Exception("The array of ids is empty");
-            Console.WriteLine("ids: {0}", String.Join(", ", ids));
+            var ids10 = ids.Take(10).ToArray();
+            Console.WriteLine("ids: {0}", String.Join(", ", ids10));
 
-            Console.WriteLine(GetUrl(ids[0]));
+            var tasks = new List<Task>();
+            foreach (var id in ids10)
+                tasks.Add(Task.Run(() => GetUrl(id)));
+
+
+            await Task.WhenAll(tasks);
+
+            List<UrlModel> results = new List<UrlModel>();
+            foreach (var task in tasks)
+            {
+                var result = ((Task<UrlModel>)task).Result;
+                results.Add(result);
+            }
+
+            Console.WriteLine("ids: {0}", String.Join(", ", results));
         }
 
         private UrlModel GetUrl(int id)
         {
-            HtmlWeb web = new HtmlWeb();
+            try
+            {
+                HtmlWeb web = new HtmlWeb();
 
-            var url = Constants.NnmClubTopic + "?t=" + Convert.ToString(id);
-            var doc = _useProxy
-                ? web.Load(url, _currentProxy.ProxyHost, _currentProxy.ProxyPort, _currentProxy.UserId,
-                    _currentProxy.Password)
-                : web.Load(url);
-            string title = doc.DocumentNode.SelectSingleNode("//a[@class='maintitle']").InnerText;
-            string imgUrl = doc.DocumentNode.SelectSingleNode("//meta[@property='og:image']").Attributes["content"]
-                .Value;
+                var url = Constants.NnmClubTopic + "?t=" + Convert.ToString(id);
+                var doc = _useProxy
+                    ? web.Load(url, _currentProxy.ProxyHost, _currentProxy.ProxyPort, _currentProxy.UserId,
+                        _currentProxy.Password)
+                    : web.Load(url);
 
-            return new UrlModel(id, title, imgUrl);
+                string title = doc.DocumentNode.SelectSingleNode("//a[@class='maintitle']").InnerText;
+                string imgUrl = doc.DocumentNode.SelectSingleNode("//meta[@property='og:image']").Attributes["content"]
+                    .Value;
+                var urlModel = new UrlModel(id, title, imgUrl);
+                Console.WriteLine(urlModel);
+                return urlModel;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e.Message);
+            }
+
+            return null;
         }
 
         private string DecodeText(string text)
