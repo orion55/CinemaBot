@@ -67,11 +67,7 @@ namespace CinemaBot.Services.Services
                         int[] ids = new int[count];
 
                         for (int j = 0; j < count; j++)
-                        {
-                            // _items[j] = DecodeText(nodes[j].InnerText);
-                            // _items[j] = nodes[j].InnerText;
                             ids[j] = GetParamFromUrl(nodes[j].Attributes["href"].Value);
-                        }
 
                         ids = ids.Except(_exceptionIds).ToArray();
                         SecondPagesParser(ids);
