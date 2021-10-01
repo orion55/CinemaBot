@@ -22,6 +22,7 @@ namespace CinemaBot.Services.Services
         private readonly ProxyService _serviceProxy;
         private Proxy _currentProxy;
         private readonly int[] _exceptionIds;
+        private const int maxCount = 3;
 
         public ParserService(ILogger log, IConfiguration configuration)
         {
@@ -70,6 +71,7 @@ namespace CinemaBot.Services.Services
                             ids[j] = GetParamFromUrl(nodes[j].Attributes["href"].Value);
 
                         ids = ids.Except(_exceptionIds).ToArray();
+
                         SecondPagesParser(ids);
                     }
                     else
@@ -77,29 +79,32 @@ namespace CinemaBot.Services.Services
                         throw new Exception("The parsing result is empty");
                     }
                 }
-                catch (WebException ex)
+                catch (Exception ex)
                 {
-                    if (_useProxy)
+                    if (ex is WebException)
                     {
-                        i++;
-                        _serviceProxy.SetBadProxy(_currentProxy.Id);
-                        _log.Error(_currentProxy.ProxyHost + " is bad");
-                        isStarting = true;
-                        if (i == _serviceProxy.Count)
+                        if (_useProxy)
                         {
-                            _serviceProxy.SaveProxy();
-                            throw new Exception("Link " + url + " loading failed");
-                        }
+                            i++;
+                            // _serviceProxy.SetBadProxy(_currentProxy.Id);
+                            _log.Error("{0} is bad", propertyValue: _currentProxy.ProxyHost);
+                            isStarting = true;
+                            if (i == _serviceProxy.Count)
+                            {
+                                _serviceProxy.SaveProxy();
+                                throw new Exception("Link " + url + " loading failed");
+                            }
 
-                        _currentProxy = _serviceProxy.GetRandomProxy() ??
-                                        throw new Exception("The proxy list is empty");
+                            _currentProxy = _serviceProxy.GetRandomProxy() ??
+                                            throw new Exception("The proxy list is empty");
+                        }
                     }
 
                     _log.Error(ex.Message);
                 }
             } while (isStarting);
 
-            if (_useProxy) _serviceProxy.SaveProxy();
+            // if (_useProxy) _serviceProxy.SaveProxy();
         }
 
         private async void SecondPagesParser(int[] ids)
@@ -110,17 +115,25 @@ namespace CinemaBot.Services.Services
             Console.WriteLine("ids: {0}", String.Join(", ", ids10));
 
             var tasks = new List<Task>();
-            foreach (var id in ids10)
-                tasks.Add(Task.Run(() => GetUrl(id)));
 
+            try
+            {
+                foreach (var id in ids10)
+                    tasks.Add(Task.Run(() => GetUrl(id)));
 
-            await Task.WhenAll(tasks);
+                await Task.WhenAll(tasks);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message);
+            }
 
             List<UrlModel> results = new List<UrlModel>();
             foreach (var task in tasks)
             {
                 var result = ((Task<UrlModel>)task).Result;
-                results.Add(result);
+                if (result != null)
+                    results.Add(result);
             }
 
             Console.WriteLine("ids: {0}", String.Join(", ", results));
@@ -128,27 +141,58 @@ namespace CinemaBot.Services.Services
 
         private UrlModel GetUrl(int id)
         {
-            try
-            {
-                HtmlWeb web = new HtmlWeb();
+            var proxy = _serviceProxy.GetRandomProxy() ??
+                        throw new Exception("The proxy list is empty");
+            int i = 0;
+            bool isStarting = false;
+            var url = Constants.NnmClubTopic + "?t=" + Convert.ToString(id);
+            HtmlWeb web = new HtmlWeb();
 
-                var url = Constants.NnmClubTopic + "?t=" + Convert.ToString(id);
-                var doc = _useProxy
-                    ? web.Load(url, _currentProxy.ProxyHost, _currentProxy.ProxyPort, _currentProxy.UserId,
-                        _currentProxy.Password)
-                    : web.Load(url);
-
-                string title = doc.DocumentNode.SelectSingleNode("//a[@class='maintitle']").InnerText;
-                string imgUrl = doc.DocumentNode.SelectSingleNode("//meta[@property='og:image']").Attributes["content"]
-                    .Value;
-                var urlModel = new UrlModel(id, title, imgUrl);
-                Console.WriteLine(urlModel);
-                return urlModel;
-            }
-            catch (Exception e)
+            do
             {
-                Console.WriteLine("Error: " + e.Message);
-            }
+                try
+                {
+                    var doc = _useProxy
+                        ? web.Load(url, proxy.ProxyHost, proxy.ProxyPort, proxy.UserId,
+                            proxy.Password)
+                        : web.Load(url);
+
+                    string title = doc.DocumentNode.SelectSingleNode("//a[@class='maintitle']").InnerText;
+                    string imgUrl = doc.DocumentNode.SelectSingleNode("//meta[@property='og:image']")
+                        .Attributes["content"]
+                        .Value;
+                    var urlModel = new UrlModel(id, title, imgUrl);
+                    return urlModel;
+                }
+                catch (Exception ex)
+                {
+                    if (ex is NullReferenceException)
+                    {
+                        if (_useProxy)
+                        {
+                            i++;
+                            isStarting = true;
+                            if (i == maxCount)
+                            {
+                                _log.Error("Link {0} loading failed", url);
+                                return null;
+                            }
+
+                            proxy = _serviceProxy.GetRandomProxy() ??
+                                    throw new Exception("The proxy list is empty");
+                        }
+                        else
+                        {
+                            _log.Error("Link {0} loading failed", url);
+                            return null;
+                        }
+                    }
+                    else
+                    {
+                        _log.Error(ex.Message);
+                    }
+                }
+            } while (isStarting);
 
             return null;
         }
