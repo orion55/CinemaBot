@@ -86,7 +86,6 @@ namespace CinemaBot.Services.Services
                         if (_useProxy)
                         {
                             i++;
-                            // _serviceProxy.SetBadProxy(_currentProxy.Id);
                             _log.Error("{0} is bad", propertyValue: _currentProxy.ProxyHost);
                             isStarting = true;
                             if (i == _serviceProxy.Count)
@@ -103,8 +102,6 @@ namespace CinemaBot.Services.Services
                     _log.Error(ex.Message);
                 }
             } while (isStarting);
-
-            // if (_useProxy) _serviceProxy.SaveProxy();
         }
 
         private async void SecondPagesParser(int[] ids)
@@ -136,7 +133,7 @@ namespace CinemaBot.Services.Services
                     results.Add(result);
             }
 
-            Console.WriteLine("ids: {0}", String.Join(", ", results));
+            Console.WriteLine("ids: {0}", String.Join("\n ", results));
         }
 
         private UrlModel GetUrl(int id)
@@ -158,38 +155,46 @@ namespace CinemaBot.Services.Services
                         : web.Load(url);
 
                     string title = doc.DocumentNode.SelectSingleNode("//a[@class='maintitle']").InnerText;
-                    string imgUrl = doc.DocumentNode.SelectSingleNode("//meta[@property='og:image']")
-                        .Attributes["content"]
-                        .Value;
+                    var nodeImg = doc.DocumentNode.SelectSingleNode("//meta[@property='og:image']");
+
+                    string imgUrl = "";
+                    if (nodeImg != null)
+                        imgUrl = nodeImg.Attributes["content"].Value;
+                    else
+                    {
+                        HtmlNodeCollection nodesImg =
+                            doc.DocumentNode.SelectNodes("//var[@class='postImg postImgAligned img-right']");
+
+                        if (nodesImg != null)
+                        {
+                            HtmlNode imgNode = nodesImg[0];
+                            Console.WriteLine(imgNode.OuterHtml.ToString());
+                        }
+                    }
+
                     var urlModel = new UrlModel(id, title, imgUrl);
                     return urlModel;
                 }
                 catch (Exception ex)
                 {
-                    if (ex is NullReferenceException)
+                    if (_useProxy)
                     {
-                        if (_useProxy)
-                        {
-                            i++;
-                            isStarting = true;
-                            if (i == maxCount)
-                            {
-                                _log.Error("Link {0} loading failed", url);
-                                return null;
-                            }
-
-                            proxy = _serviceProxy.GetRandomProxy() ??
-                                    throw new Exception("The proxy list is empty");
-                        }
-                        else
+                        i++;
+                        isStarting = true;
+                        if (i == maxCount)
                         {
                             _log.Error("Link {0} loading failed", url);
                             return null;
                         }
+
+                        proxy = _serviceProxy.GetRandomProxy() ??
+                                throw new Exception("The proxy list is empty");
                     }
                     else
                     {
+                        _log.Error("Link {0} loading failed", url);
                         _log.Error(ex.Message);
+                        return null;
                     }
                 }
             } while (isStarting);

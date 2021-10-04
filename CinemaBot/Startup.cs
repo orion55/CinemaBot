@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using CinemaBot.Configurations;
 using CinemaBot.Data;
-using CinemaBot.Services;
 using CinemaBot.Services.Interfaces;
 using CinemaBot.Services.Services;
 using Hangfire;
