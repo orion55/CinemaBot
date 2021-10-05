@@ -76,7 +76,7 @@ namespace CinemaBot.Services.Services
             if (listBad.Any())
             {
                 SaveFileProxy(listBad, BadProxyFilename, false);
-                
+
                 var proxyListGood = _proxies.Where(proxy => !proxy.IsBad);
                 IEnumerable<Proxy> listGood = proxyListGood as Proxy[] ?? proxyListGood.ToArray();
                 SaveFileProxy(listGood, ProxyFilename, true);

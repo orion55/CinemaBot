@@ -40,7 +40,15 @@ namespace CinemaBot.Services.Services
             }
         }
 
-        public void MainPageParser(string url)
+        public async void Parser(string url)
+        {
+            int[] ids = MainPageParser(url);
+            Console.WriteLine("ids: {0}", String.Join(", ", ids));
+            List<UrlModel> links = await SecondPagesParser(ids);
+            Console.WriteLine("links: {0}", String.Join("\n ", links));
+        }
+
+        private int[] MainPageParser(string url)
         {
             if (String.IsNullOrEmpty(url))
                 throw new Exception("The \"url\" value is empty");
@@ -70,14 +78,10 @@ namespace CinemaBot.Services.Services
                         for (int j = 0; j < count; j++)
                             ids[j] = GetParamFromUrl(nodes[j].Attributes["href"].Value);
 
-                        ids = ids.Except(_exceptionIds).ToArray();
+                        return ids.Except(_exceptionIds).ToArray();
+                    }
 
-                        SecondPagesParser(ids);
-                    }
-                    else
-                    {
-                        throw new Exception("The parsing result is empty");
-                    }
+                    throw new Exception("The parsing result is empty");
                 }
                 catch (Exception ex)
                 {
@@ -102,14 +106,16 @@ namespace CinemaBot.Services.Services
                     _log.Error(ex.Message);
                 }
             } while (isStarting);
+
+            return null;
         }
 
-        private async void SecondPagesParser(int[] ids)
+        private async Task<List<UrlModel>> SecondPagesParser(int[] ids)
         {
             if (ids == null || ids.Length == 0)
                 throw new Exception("The array of ids is empty");
             var ids10 = ids.Take(10).ToArray();
-            Console.WriteLine("ids: {0}", String.Join(", ", ids10));
+            // var ids10 = ids;
 
             var tasks = new List<Task>();
 
@@ -133,7 +139,7 @@ namespace CinemaBot.Services.Services
                     results.Add(result);
             }
 
-            Console.WriteLine("ids: {0}", String.Join("\n ", results));
+            return results;
         }
 
         private UrlModel GetUrl(int id)
@@ -168,7 +174,10 @@ namespace CinemaBot.Services.Services
                         if (nodesImg != null)
                         {
                             HtmlNode imgNode = nodesImg[0];
-                            Console.WriteLine(imgNode.OuterHtml.ToString());
+                            string titleImg = imgNode.Attributes["title"].Value;
+                            string linkStr = "?link=";
+                            int index = titleImg.IndexOf(linkStr, StringComparison.Ordinal) + linkStr.Length;
+                            imgUrl = titleImg.Substring(index, titleImg.Length - index);
                         }
                     }
 

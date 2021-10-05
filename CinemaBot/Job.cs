@@ -24,7 +24,7 @@ namespace CinemaBot
             string[] urls = _config.GetSection("urls").Get<string[]>();
             try
             {
-                _parser.MainPageParser(urls[0]);
+                _parser.Parser(urls[0]);
             }
             catch (Exception ex)
             {
