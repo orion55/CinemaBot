@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using AutoMapper;
 using CinemaBot.Configurations;
 using CinemaBot.Data;
 using CinemaBot.Services.Interfaces;
@@ -27,6 +28,8 @@ namespace CinemaBot
         private readonly IConfiguration _configuration;
         public ILogger _logger { get; }
 
+        private IMapper _mapper;
+
         public Startup()
         {
             var builder = new ConfigurationBuilder()
@@ -34,7 +37,6 @@ namespace CinemaBot
                 .AddJsonFile("appsettings.json");
 
             _configuration = builder.Build();
-            // Console.WriteLine(string.Join("\n", this.configuration.GetSection("urls").Get<string[]>()));
 
             string tableName = "logs";
 
@@ -68,8 +70,6 @@ namespace CinemaBot
         {
             services.AddTransient(provider => _configuration);
 
-            services.AddTransient<IParserService>(s => new ParserService(_logger, _configuration));
-
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
 
@@ -80,6 +80,12 @@ namespace CinemaBot
                 .WithJobExpirationTimeout(TimeSpan.FromDays(7));
             services.AddHangfireServer();
 
+            var mapperConfig = new MapperConfiguration(mc => { mc.AddProfile(new MappingProfile()); });
+
+            _mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(_mapper);
+
+            services.AddTransient<IParserService>(s => new ParserService(_logger, _configuration, _mapper));
             services.AddSingleton(_logger);
         }
 

@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using AutoMapper;
 using CinemaBot.Core;
 using CinemaBot.Models;
 using CinemaBot.Services.Interfaces;
@@ -18,17 +19,19 @@ namespace CinemaBot.Services.Services
     public class ParserService : IParserService
     {
         private readonly ILogger _log;
+        private readonly IMapper _mapper;
         private readonly bool _useProxy;
         private readonly ProxyService _serviceProxy;
         private Proxy _currentProxy;
         private readonly int[] _exceptionIds;
-        private const int maxCount = 3;
+        private const int MaxCount = 3;
 
-        public ParserService(ILogger log, IConfiguration configuration)
+        public ParserService(ILogger log, IConfiguration configuration, IMapper mapper)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             _log = log;
+            _mapper = mapper;
 
             _useProxy = ToBoolean(configuration["useProxy"]);
             _exceptionIds = configuration.GetSection("exceptionIds").Get<int[]>();
@@ -46,6 +49,7 @@ namespace CinemaBot.Services.Services
             Console.WriteLine("ids: {0}", String.Join(", ", ids));
             List<UrlModel> links = await SecondPagesParser(ids);
             Console.WriteLine("links: {0}", String.Join("\n ", links));
+            SaveUrls(links);
         }
 
         private int[] MainPageParser(string url)
@@ -190,7 +194,7 @@ namespace CinemaBot.Services.Services
                     {
                         i++;
                         isStarting = true;
-                        if (i == maxCount)
+                        if (i == MaxCount)
                         {
                             _log.Error("Link {0} loading failed", url);
                             return null;
@@ -225,6 +229,11 @@ namespace CinemaBot.Services.Services
             Uri myUri = new Uri(Constants.NnmClub + url);
             string param = HttpUtility.ParseQueryString(myUri.Query).Get("t");
             return ToInt32(param);
+        }
+
+        private void SaveUrls(List<UrlModel> urls)
+        {
+            
         }
     }
 }
