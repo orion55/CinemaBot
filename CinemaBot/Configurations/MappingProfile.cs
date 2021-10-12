@@ -8,7 +8,8 @@ namespace CinemaBot.Configurations
     {
         public MappingProfile()
         {
-            CreateMap<Url, UrlModel>().ReverseMap();
+            CreateMap<Url, UrlModel>();
+            CreateMap<UrlModel, Url>();
         }
     }
 }

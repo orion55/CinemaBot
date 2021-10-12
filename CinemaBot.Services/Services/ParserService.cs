@@ -7,9 +7,14 @@ using System.Threading.Tasks;
 using System.Web;
 using AutoMapper;
 using CinemaBot.Core;
+using CinemaBot.Data;
+using CinemaBot.Data.Entites;
+using CinemaBot.Data.Repositories;
+using CinemaBot.Data.Repositories.Interfaces;
 using CinemaBot.Models;
 using CinemaBot.Services.Interfaces;
 using HtmlAgilityPack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using static System.Convert;
@@ -25,6 +30,7 @@ namespace CinemaBot.Services.Services
         private Proxy _currentProxy;
         private readonly int[] _exceptionIds;
         private const int MaxCount = 3;
+        private readonly IUrlRepository _urlRepository;
 
         public ParserService(ILogger log, IConfiguration configuration, IMapper mapper)
         {
@@ -32,6 +38,13 @@ namespace CinemaBot.Services.Services
 
             _log = log;
             _mapper = mapper;
+            // _urlRepository = unitOfWork.Urls;
+
+            var contextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
+                .Options;
+            ApplicationDbContext context = new ApplicationDbContext(contextOptions);
+            _urlRepository = new UrlRepository(context);
 
             _useProxy = ToBoolean(configuration["useProxy"]);
             _exceptionIds = configuration.GetSection("exceptionIds").Get<int[]>();
@@ -231,9 +244,19 @@ namespace CinemaBot.Services.Services
             return ToInt32(param);
         }
 
-        private void SaveUrls(List<UrlModel> urls)
+        private async void SaveUrls(List<UrlModel> urls)
         {
+            if (urls.Any()) return;
             
+            try
+            {
+                List<Url> links = urls.Select(url => _mapper.Map<Url>(url)).ToList();
+                await _urlRepository.InsertRangeAsync(links);
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message);
+            }
         }
     }
 }

@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\CinemaBot.Core\CinemaBot.Core.csproj" />
+      <ProjectReference Include="..\CinemaBot.Data\CinemaBot.Data.csproj" />
       <ProjectReference Include="..\CinemaBot.Models\CinemaBot.Models.csproj" />
     </ItemGroup>
 

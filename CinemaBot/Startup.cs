@@ -4,6 +4,8 @@ using System.IO;
 using AutoMapper;
 using CinemaBot.Configurations;
 using CinemaBot.Data;
+using CinemaBot.Data.Repositories;
+using CinemaBot.Data.Repositories.Interfaces;
 using CinemaBot.Services.Interfaces;
 using CinemaBot.Services.Services;
 using Hangfire;
@@ -73,6 +75,9 @@ namespace CinemaBot
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            // services.AddScoped<IUrlRepository, UrlRepository>();
+
             services.AddHangfire(config =>
                 config.UsePostgreSqlStorage(_configuration.GetConnectionString("DefaultConnection")));
             GlobalConfiguration.Configuration
@@ -85,7 +90,8 @@ namespace CinemaBot
             _mapper = mapperConfig.CreateMapper();
             services.AddSingleton(_mapper);
 
-            services.AddTransient<IParserService>(s => new ParserService(_logger, _configuration, _mapper));
+            services.AddTransient<IParserService, ParserService>();
+
             services.AddSingleton(_logger);
         }
 
