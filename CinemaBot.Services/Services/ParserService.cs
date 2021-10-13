@@ -59,8 +59,14 @@ namespace CinemaBot.Services.Services
         public async void Parser(string url)
         {
             int[] ids = MainPageParser(url);
-            Console.WriteLine("ids: {0}", String.Join(", ", ids));
-            List<UrlModel> links = await SecondPagesParser(ids);
+
+            var ids10 = ids.Take(10).ToArray();
+            Console.WriteLine("ids: {0}", String.Join(", ", ids10));
+
+            var resultIds = await CheckIds(ids10);
+            Console.WriteLine("resultIds: {0}", String.Join(", ", resultIds));
+
+            List<UrlModel> links = await SecondPagesParser(ids10);
             Console.WriteLine("links: {0}", String.Join("\n ", links));
             SaveUrls(links);
         }
@@ -131,14 +137,12 @@ namespace CinemaBot.Services.Services
         {
             if (ids == null || ids.Length == 0)
                 throw new Exception("The array of ids is empty");
-            var ids10 = ids.Take(10).ToArray();
-            // var ids10 = ids;
 
             var tasks = new List<Task>();
 
             try
             {
-                foreach (var id in ids10)
+                foreach (var id in ids)
                     tasks.Add(Task.Run(() => GetUrl(id)));
 
                 await Task.WhenAll(tasks);
@@ -246,8 +250,8 @@ namespace CinemaBot.Services.Services
 
         private async void SaveUrls(List<UrlModel> urls)
         {
-            if (urls.Any()) return;
-            
+            if (!urls.Any()) return;
+
             try
             {
                 List<Url> links = urls.Select(url => _mapper.Map<Url>(url)).ToList();
@@ -257,6 +261,23 @@ namespace CinemaBot.Services.Services
             {
                 _log.Error(e.Message);
             }
+        }
+
+        private async Task<int[]> CheckIds(int[] ids)
+        {
+            if (ids == null || ids.Length == 0) return null;
+
+            try
+            {
+                var urls = await _urlRepository.FindAllByWhereAsync(url => ids.Contains(url.Id));
+                return urls.Select(url => url.Id).ToArray();
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message);
+            }
+
+            return null;
         }
     }
 }
