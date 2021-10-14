@@ -4,8 +4,6 @@ using System.IO;
 using AutoMapper;
 using CinemaBot.Configurations;
 using CinemaBot.Data;
-using CinemaBot.Data.Repositories;
-using CinemaBot.Data.Repositories.Interfaces;
 using CinemaBot.Services.Interfaces;
 using CinemaBot.Services.Services;
 using Hangfire;
@@ -28,7 +26,7 @@ namespace CinemaBot
     public class Startup
     {
         private readonly IConfiguration _configuration;
-        public ILogger _logger { get; }
+        private ILogger Logger { get; }
 
         private IMapper _mapper;
 
@@ -59,7 +57,7 @@ namespace CinemaBot
 
             string connectionstring = _configuration.GetConnectionString("DefaultConnection");
 
-            _logger = new LoggerConfiguration()
+            Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .WriteTo.Console(theme: AnsiConsoleTheme.Literate)
                 .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
@@ -73,7 +71,8 @@ namespace CinemaBot
             services.AddTransient(provider => _configuration);
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
+                options
+                    .UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             // services.AddScoped<IUrlRepository, UrlRepository>();
@@ -92,7 +91,7 @@ namespace CinemaBot
 
             services.AddTransient<IParserService, ParserService>();
 
-            services.AddSingleton(_logger);
+            services.AddSingleton(Logger);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
@@ -127,7 +126,7 @@ namespace CinemaBot
                 endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
             });
 
-            Job jobscheduler = new Job(_logger, _configuration, parserService);
+            Job jobscheduler = new Job(Logger, _configuration, parserService);
             backgroundJobClient.Enqueue(() => jobscheduler.Run());
             // recurringJobManager.AddOrUpdate("Insert Employee : Runs Every 30 Sec", () => jobscheduler.Run(), "*/30 * * * * *");
         }

@@ -62,13 +62,17 @@ namespace CinemaBot.Services.Services
 
             var ids10 = ids.Take(10).ToArray();
             Console.WriteLine("ids: {0}", String.Join(", ", ids10));
+            // var ids10 = ids;
 
             var resultIds = await CheckIds(ids10);
             Console.WriteLine("resultIds: {0}", String.Join(", ", resultIds));
 
-            List<UrlModel> links = await SecondPagesParser(ids10);
-            Console.WriteLine("links: {0}", String.Join("\n ", links));
-            SaveUrls(links);
+            if (resultIds.Length != 0)
+            {
+                List<UrlModel> links = await SecondPagesParser(resultIds);
+                Console.WriteLine("links: {0}", String.Join("\n ", links));
+                SaveUrls(links);    
+            }
         }
 
         private int[] MainPageParser(string url)
@@ -136,7 +140,10 @@ namespace CinemaBot.Services.Services
         private async Task<List<UrlModel>> SecondPagesParser(int[] ids)
         {
             if (ids == null || ids.Length == 0)
-                throw new Exception("The array of ids is empty");
+            {
+                _log.Error("The array of identifiers for the second-level page analyzer is empty");
+                return null;
+            }
 
             var tasks = new List<Task>();
 
@@ -250,7 +257,7 @@ namespace CinemaBot.Services.Services
 
         private async void SaveUrls(List<UrlModel> urls)
         {
-            if (!urls.Any()) return;
+            if (urls == null ) return;
 
             try
             {
@@ -270,7 +277,9 @@ namespace CinemaBot.Services.Services
             try
             {
                 var urls = await _urlRepository.FindAllByWhereAsync(url => ids.Contains(url.Id));
-                return urls.Select(url => url.Id).ToArray();
+                var dbIds = urls.Select(url => url.Id).ToArray();
+                if (dbIds.Length == 0) return ids;
+                return ids.Except(dbIds).ToArray();
             }
             catch (Exception e)
             {
