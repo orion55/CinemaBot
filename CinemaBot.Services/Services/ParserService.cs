@@ -60,9 +60,9 @@ namespace CinemaBot.Services.Services
         {
             int[] ids = MainPageParser(url);
 
-            var ids10 = ids.Take(10).ToArray();
-            Console.WriteLine("ids: {0}", String.Join(", ", ids10));
-            // var ids10 = ids;
+            // var ids10 = ids.Take(10).ToArray();
+            // Console.WriteLine("ids: {0}", String.Join(", ", ids10));
+            var ids10 = ids;
 
             var resultIds = await CheckIds(ids10);
             Console.WriteLine("resultIds: {0}", String.Join(", ", resultIds));
