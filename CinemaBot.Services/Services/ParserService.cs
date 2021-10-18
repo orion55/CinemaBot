@@ -31,6 +31,7 @@ namespace CinemaBot.Services.Services
         private readonly int[] _exceptionIds;
         private const int MaxCount = 3;
         private readonly IUrlRepository _urlRepository;
+        private readonly ITelegramService _telegram;
 
         public ParserService(ILogger log, IConfiguration configuration, IMapper mapper)
         {
@@ -54,6 +55,7 @@ namespace CinemaBot.Services.Services
                 _serviceProxy = new ProxyService();
                 _currentProxy = _serviceProxy.GetRandomProxy() ?? throw new Exception("The proxy list is empty");
             }
+            
         }
 
         public async void Parser(string url)

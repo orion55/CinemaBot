@@ -34,7 +34,8 @@ namespace CinemaBot
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json");
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile("config.json");
 
             _configuration = builder.Build();
 
@@ -88,7 +89,8 @@ namespace CinemaBot
 
             _mapper = mapperConfig.CreateMapper();
             services.AddSingleton(_mapper);
-
+            
+            services.AddTransient<ITelegramService, TelegramService>();
             services.AddTransient<IParserService, ParserService>();
 
             services.AddSingleton(Logger);
