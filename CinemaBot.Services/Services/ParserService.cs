@@ -33,13 +33,13 @@ namespace CinemaBot.Services.Services
         private readonly IUrlRepository _urlRepository;
         private readonly ITelegramService _telegram;
 
-        public ParserService(ILogger log, IConfiguration configuration, IMapper mapper)
+        public ParserService(ILogger log, IConfiguration configuration, IMapper mapper, ITelegramService telegram)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             _log = log;
             _mapper = mapper;
-            // _urlRepository = unitOfWork.Urls;
+            _telegram = telegram;
 
             var contextOptions = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
@@ -55,11 +55,12 @@ namespace CinemaBot.Services.Services
                 _serviceProxy = new ProxyService();
                 _currentProxy = _serviceProxy.GetRandomProxy() ?? throw new Exception("The proxy list is empty");
             }
-            
         }
 
         public async void Parser(string url)
         {
+            var bot = await _telegram.GetBotClientAsync();
+            await _telegram.SendMessage(null, "Hello World!");
             int[] ids = MainPageParser(url);
 
             // var ids10 = ids.Take(10).ToArray();
@@ -73,7 +74,7 @@ namespace CinemaBot.Services.Services
             {
                 List<UrlModel> links = await SecondPagesParser(resultIds);
                 Console.WriteLine("links: {0}", String.Join("\n ", links));
-                SaveUrls(links);    
+                SaveUrls(links);
             }
         }
 
@@ -259,7 +260,7 @@ namespace CinemaBot.Services.Services
 
         private async void SaveUrls(List<UrlModel> urls)
         {
-            if (urls == null ) return;
+            if (urls == null) return;
 
             try
             {

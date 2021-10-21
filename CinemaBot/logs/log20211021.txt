@@ -1,0 +1,24 @@
+2021-10-21 09:28:44.202 +05:00 [INF] Parsing started
+2021-10-21 09:28:44.202 +05:00 [INF] Parsing started
+2021-10-21 09:28:44.407 +05:00 [INF] Parsing started
+2021-10-21 09:28:44.458 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-21 09:28:44.458 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-21 09:28:44.458 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-21 09:28:45.080 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-21 09:28:45.080 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-21 09:28:45.081 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-21 09:28:49.326 +05:00 [ERR] An error occurred while updating the entries. See the inner exception for details.
+2021-10-21 09:28:50.234 +05:00 [ERR] An error occurred while updating the entries. See the inner exception for details.
+2021-10-21 09:30:19.609 +05:00 [INF] Parsing started
+2021-10-21 09:30:19.738 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-21 09:30:20.160 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-21 09:32:06.517 +05:00 [INF] Parsing started
+2021-10-21 09:32:07.157 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-21 09:32:07.163 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-21 09:43:24.719 +05:00 [INF] Parsing started
+2021-10-21 09:53:44.360 +05:00 [INF] Parsing started
+2021-10-21 09:53:45.044 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-21 09:53:45.483 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-21 09:57:11.121 +05:00 [INF] Parsing started
+2021-10-21 09:57:11.736 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-21 09:57:12.186 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319

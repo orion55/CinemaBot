@@ -12,11 +12,12 @@ using Telegram.Bot.Types.Enums;
 
 namespace CinemaBot.Services.Services
 {
-    public class TelegramService: ITelegramService
+    public class TelegramService : ITelegramService
     {
         private readonly ILogger _log;
-        static public ITelegramBotClient botClient;
+        private ITelegramBotClient _botClient = null;
         private readonly IConfiguration _config;
+        public CancellationTokenSource cts;
 
         public TelegramService(ILogger log, IConfiguration configuration)
         {
@@ -24,37 +25,34 @@ namespace CinemaBot.Services.Services
             _config = configuration;
         }
 
-        public async Task Init()
+        public async Task<ITelegramBotClient> GetBotClientAsync()
         {
-            botClient = new TelegramBotClient(_config["TelegramToken"]);
-            var me = await botClient.GetMeAsync();
-            Console.WriteLine(
-                $"Hello, World! I am user {me.Id} and my name is {me.FirstName}."
-            );
+            if (_botClient != null)
+                return _botClient;
 
-            using var cts = new CancellationTokenSource();
+            _botClient = new TelegramBotClient(_config["TelegramToken"]);
+            var me = await _botClient.GetMeAsync();
 
-            // StartReceiving does not block the caller thread. Receiving is done on the ThreadPool.
-            botClient.StartReceiving(
+            cts = new CancellationTokenSource();
+            _botClient.StartReceiving(
                 new DefaultUpdateHandler(HandleUpdateAsync, HandleErrorAsync),
                 cts.Token);
-
-            Console.WriteLine($"Start listening for @{me.Username}");
-            // Console.ReadLine();
-
-            // Send cancellation request to stop bot
+            
+            _log.Information("Start listening for @{0}", me.Username);
             // cts.Cancel();
+            return _botClient;
         }
 
         Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
         {
             var ErrorMessage = exception switch
             {
-                ApiRequestException apiRequestException => $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}",
-                _                                       => exception.ToString()
+                ApiRequestException apiRequestException =>
+                    $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}",
+                _ => exception.ToString()
             };
 
-            Console.WriteLine(ErrorMessage);
+            _log.Error(ErrorMessage);
             return Task.CompletedTask;
         }
 
@@ -66,12 +64,22 @@ namespace CinemaBot.Services.Services
                 return;
 
             var chatId = update.Message.Chat.Id;
-    
+
             Console.WriteLine($"Received a '{update.Message.Text}' message in chat {chatId}.");
 
             await botClient.SendTextMessageAsync(
                 chatId: chatId,
-                text:   "You said:\n" + update.Message.Text
+                text: "You said:\n" + update.Message.Text
+            );
+        }
+        
+        public async Task SendMessage(Chat chatId, string message)
+        {
+            await _botClient.SendPhotoAsync(
+                chatId: 311189536,
+                photo: "https://github.com/TelegramBots/book/raw/master/src/docs/photo-ara.jpg",
+                caption: "<b>Ara bird</b>. <i>Source</i>: <a href=\"https://pixabay.com\">Pixabay</a>",
+                parseMode: ParseMode.Html
             );
         }
     }
