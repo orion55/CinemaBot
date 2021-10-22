@@ -59,23 +59,25 @@ namespace CinemaBot.Services.Services
 
         public async void Parser(string url)
         {
-            var bot = await _telegram.GetBotClientAsync();
-            await _telegram.SendMessage(null, "Hello World!");
             int[] ids = MainPageParser(url);
 
-            // var ids10 = ids.Take(10).ToArray();
-            // Console.WriteLine("ids: {0}", String.Join(", ", ids10));
-            var ids10 = ids;
+            var ids10 = ids.Take(2).ToArray();
+            Console.WriteLine("ids: {0}", String.Join(", ", ids10));
+            // var ids10 = ids;
 
-            var resultIds = await CheckIds(ids10);
+            /*var resultIds = await CheckIds(ids10);
             Console.WriteLine("resultIds: {0}", String.Join(", ", resultIds));
 
             if (resultIds.Length != 0)
-            {
-                List<UrlModel> links = await SecondPagesParser(resultIds);
-                Console.WriteLine("links: {0}", String.Join("\n ", links));
-                SaveUrls(links);
-            }
+            {*/
+            // List<UrlModel> links = await SecondPagesParser(resultIds);
+            List<UrlModel> links = await SecondPagesParser(ids10);
+            Console.WriteLine("links: {0}", String.Join("\n ", links));
+            
+            var bot = await _telegram.GetBotClientAsync();
+            await _telegram.SendMessageMovies(links);
+            /*SaveUrls(links);
+        }*/
         }
 
         private int[] MainPageParser(string url)

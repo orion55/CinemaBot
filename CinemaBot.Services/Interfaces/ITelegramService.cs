@@ -1,12 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using CinemaBot.Models;
 using Telegram.Bot;
-using Telegram.Bot.Types;
 
 namespace CinemaBot.Services.Interfaces
 {
     public interface ITelegramService
     {
         Task<ITelegramBotClient> GetBotClientAsync();
-        Task SendMessage(Chat chatId, string message);
+        Task SendMessageMovies(List<UrlModel> links);
     }
 }

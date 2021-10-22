@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using CinemaBot.Models;
 using CinemaBot.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Serilog;
@@ -37,7 +39,7 @@ namespace CinemaBot.Services.Services
             _botClient.StartReceiving(
                 new DefaultUpdateHandler(HandleUpdateAsync, HandleErrorAsync),
                 cts.Token);
-            
+
             _log.Information("Start listening for @{0}", me.Username);
             // cts.Cancel();
             return _botClient;
@@ -65,22 +67,36 @@ namespace CinemaBot.Services.Services
 
             var chatId = update.Message.Chat.Id;
 
-            Console.WriteLine($"Received a '{update.Message.Text}' message in chat {chatId}.");
+            _log.Information("Received a '{0}' message in chat {1}.", update.Message.Text, chatId);
 
             await botClient.SendTextMessageAsync(
                 chatId: chatId,
                 text: "You said:\n" + update.Message.Text
             );
         }
-        
-        public async Task SendMessage(Chat chatId, string message)
+        public async Task SendMessageMovies(List<UrlModel> urls)
         {
-            await _botClient.SendPhotoAsync(
-                chatId: 311189536,
-                photo: "https://github.com/TelegramBots/book/raw/master/src/docs/photo-ara.jpg",
-                caption: "<b>Ara bird</b>. <i>Source</i>: <a href=\"https://pixabay.com\">Pixabay</a>",
-                parseMode: ParseMode.Html
-            );
+            if (urls == null) return;
+
+            try
+            {
+                foreach (var url in urls)
+                {
+                    var urlId = url.UrlId();
+                    var caption = $"{url.Title}\n\n<a href=\"{urlId}\">{urlId}</a>"; 
+                    await _botClient.SendPhotoAsync(
+                        chatId: _config["TelegramChatId"],
+                        photo: url.ImgUrl,
+                        caption: caption,
+                        parseMode: ParseMode.Html
+                    );
+                }
+            }
+            catch (Exception e)
+            {
+                _log.Error(e.Message);
+            }
+            
         }
     }
 }
