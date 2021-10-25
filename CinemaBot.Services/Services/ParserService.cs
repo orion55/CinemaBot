@@ -61,23 +61,19 @@ namespace CinemaBot.Services.Services
         {
             int[] ids = MainPageParser(url);
 
-            var ids10 = ids.Take(2).ToArray();
-            Console.WriteLine("ids: {0}", String.Join(", ", ids10));
-            // var ids10 = ids;
-
-            /*var resultIds = await CheckIds(ids10);
-            Console.WriteLine("resultIds: {0}", String.Join(", ", resultIds));
+            var resultIds = await CheckIds(ids);
 
             if (resultIds.Length != 0)
-            {*/
-            // List<UrlModel> links = await SecondPagesParser(resultIds);
-            List<UrlModel> links = await SecondPagesParser(ids10);
-            Console.WriteLine("links: {0}", String.Join("\n ", links));
-            
-            var bot = await _telegram.GetBotClientAsync();
-            await _telegram.SendMessageMovies(links);
-            /*SaveUrls(links);
-        }*/
+            {
+                List<UrlModel> links = await SecondPagesParser(resultIds);
+                
+                SaveToLog(links);
+                
+                await _telegram.GetBotClientAsync();
+                await _telegram.SendMessageMovies(links);
+
+                await SaveUrls(links);
+            }
         }
 
         private int[] MainPageParser(string url)
@@ -244,15 +240,6 @@ namespace CinemaBot.Services.Services
             return null;
         }
 
-        private string DecodeText(string text)
-        {
-            var encFrom = Encoding.GetEncoding("windows-1251");
-            var encTo = Encoding.GetEncoding("utf-8");
-            byte[] bytes = encFrom.GetBytes(text);
-            bytes = Encoding.Convert(encFrom, encTo, bytes);
-            return encTo.GetString(bytes);
-        }
-
         private int GetParamFromUrl(string url)
         {
             Uri myUri = new Uri(Constants.NnmClub + url);
@@ -260,7 +247,7 @@ namespace CinemaBot.Services.Services
             return ToInt32(param);
         }
 
-        private async void SaveUrls(List<UrlModel> urls)
+        private async Task SaveUrls(List<UrlModel> urls)
         {
             if (urls == null) return;
 
@@ -292,6 +279,11 @@ namespace CinemaBot.Services.Services
             }
 
             return null;
+        }
+
+        private void SaveToLog(List<UrlModel> urls)
+        {
+            urls.ForEach((url) => _log.Information(url.ToString()));
         }
     }
 }

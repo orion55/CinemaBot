@@ -19,7 +19,7 @@ namespace CinemaBot.Services.Services
         private readonly ILogger _log;
         private ITelegramBotClient _botClient = null;
         private readonly IConfiguration _config;
-        public CancellationTokenSource cts;
+        private CancellationTokenSource _cts;
 
         public TelegramService(ILogger log, IConfiguration configuration)
         {
@@ -35,13 +35,12 @@ namespace CinemaBot.Services.Services
             _botClient = new TelegramBotClient(_config["TelegramToken"]);
             var me = await _botClient.GetMeAsync();
 
-            cts = new CancellationTokenSource();
+            _cts = new CancellationTokenSource();
             _botClient.StartReceiving(
                 new DefaultUpdateHandler(HandleUpdateAsync, HandleErrorAsync),
-                cts.Token);
+                _cts.Token);
 
             _log.Information("Start listening for @{0}", me.Username);
-            // cts.Cancel();
             return _botClient;
         }
 
