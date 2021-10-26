@@ -356,4 +356,4 @@ MigrationBackup/
 # End of https://www.gitignore.io/api/visualstudio
 
 .idea/
-config.json 
+CinemaBot/config.json 
