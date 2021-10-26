@@ -89,16 +89,16 @@ namespace CinemaBot
 
             _mapper = mapperConfig.CreateMapper();
             services.AddSingleton(_mapper);
-            
-            services.AddTransient<ITelegramService, TelegramService>();
+
+            services.AddTransient<TelegramService>();
             services.AddTransient<IParserService, ParserService>();
 
             services.AddSingleton(Logger);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
-            IBackgroundJobClient backgroundJobClient,
-            IParserService parserService)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IParserService parserService,
+            IRecurringJobManager recurringJobManager
+        )
         {
             if (env.IsDevelopment())
             {
@@ -129,8 +129,8 @@ namespace CinemaBot
             });
 
             Job jobscheduler = new Job(Logger, _configuration, parserService);
-            backgroundJobClient.Enqueue(() => jobscheduler.Run());
-            // recurringJobManager.AddOrUpdate("Insert Employee : Runs Every 30 Sec", () => jobscheduler.Run(), "*/30 * * * * *");
+            // backgroundJobClient.Enqueue(() => jobscheduler.Run());
+            recurringJobManager.AddOrUpdate("Runs Every 1 Min", () => jobscheduler.Run(), "0/1 * * * * *");
         }
     }
 }

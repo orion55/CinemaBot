@@ -1,0 +1,372 @@
+2021-10-26 09:00:40.382 +05:00 [INF] Parsing started
+2021-10-26 09:00:40.457 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:00:45.925 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=767243 : Розенкранц и Гильденстерн мертвы / Rosencrantz &amp; Guildenstern Are Dead (1990) DVDRip : http://i.imgur.com/WazmFJx.jpg
+2021-10-26 09:00:46.674 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:00:46.852 +05:00 [INF] Received a '/start' message in chat 2018109588.
+2021-10-26 09:00:46.966 +05:00 [INF] Received a '/start' message in chat 2063705835.
+2021-10-26 09:00:47.064 +05:00 [ERR] Telegram API Error:
+[403]
+Forbidden: bot was blocked by the user
+2021-10-26 09:02:12.852 +05:00 [INF] Parsing started
+2021-10-26 09:02:12.911 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:03:52.327 +05:00 [INF] Parsing started
+2021-10-26 09:03:52.397 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:03:58.815 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:03:58.982 +05:00 [INF] Received a '/start' message in chat 2018109588.
+2021-10-26 09:03:59.112 +05:00 [INF] Received a '/start' message in chat 2063705835.
+2021-10-26 09:03:59.225 +05:00 [ERR] Telegram API Error:
+[403]
+Forbidden: bot was blocked by the user
+2021-10-26 09:05:28.944 +05:00 [INF] Parsing started
+2021-10-26 09:05:28.989 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:05:31.967 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:05:32.149 +05:00 [INF] Received a '/start' message in chat 2018109588.
+2021-10-26 09:05:32.261 +05:00 [INF] Received a '/start' message in chat 2063705835.
+2021-10-26 09:05:32.351 +05:00 [ERR] Telegram API Error:
+[403]
+Forbidden: bot was blocked by the user
+2021-10-26 09:07:04.321 +05:00 [INF] Parsing started
+2021-10-26 09:07:04.405 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:07:12.110 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:07:12.286 +05:00 [INF] Received a '/start' message in chat 2018109588.
+2021-10-26 09:07:12.418 +05:00 [INF] Received a '/start' message in chat 2063705835.
+2021-10-26 09:07:12.522 +05:00 [ERR] Telegram API Error:
+[403]
+Forbidden: bot was blocked by the user
+2021-10-26 09:07:33.896 +05:00 [INF] Parsing started
+2021-10-26 09:07:34.398 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:07:34.403 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:07:34.586 +05:00 [INF] Received a '/start' message in chat 2018109588.
+2021-10-26 09:07:34.699 +05:00 [INF] Received a '/start' message in chat 2063705835.
+2021-10-26 09:07:34.794 +05:00 [ERR] Telegram API Error:
+[403]
+Forbidden: bot was blocked by the user
+2021-10-26 09:10:27.959 +05:00 [INF] Parsing started
+2021-10-26 09:10:28.577 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:10:28.585 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:10:28.778 +05:00 [INF] Received a '/start' message in chat 2018109588.
+2021-10-26 09:10:28.893 +05:00 [INF] Received a '/start' message in chat 2063705835.
+2021-10-26 09:10:28.988 +05:00 [ERR] Telegram API Error:
+[403]
+Forbidden: bot was blocked by the user
+2021-10-26 09:11:30.297 +05:00 [INF] Parsing started
+2021-10-26 09:11:33.553 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:11:33.557 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:11:33.751 +05:00 [INF] Received a '/start' message in chat 2018109588.
+2021-10-26 09:11:33.916 +05:00 [INF] Received a '/start' message in chat 2063705835.
+2021-10-26 09:11:34.012 +05:00 [ERR] Telegram API Error:
+[403]
+Forbidden: bot was blocked by the user
+2021-10-26 09:21:08.312 +05:00 [INF] Parsing started
+2021-10-26 09:21:08.877 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:21:08.883 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:21:09.053 +05:00 [INF] Received a '/start' message in chat 2018109588.
+2021-10-26 09:21:09.175 +05:00 [INF] Received a '/start' message in chat 2063705835.
+2021-10-26 09:21:09.271 +05:00 [ERR] Telegram API Error:
+[403]
+Forbidden: bot was blocked by the user
+2021-10-26 09:27:58.139 +05:00 [INF] Parsing started
+2021-10-26 09:27:58.690 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:27:58.695 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:28:07.197 +05:00 [INF] Received a '1' message in chat 311189536.
+2021-10-26 09:28:28.197 +05:00 [INF] Parsing started
+2021-10-26 09:28:28.763 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:28:28.768 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:28:33.974 +05:00 [INF] Received a '1' message in chat 311189536.
+2021-10-26 09:30:28.992 +05:00 [INF] Parsing started
+2021-10-26 09:30:29.604 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:30:29.613 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:30:49.572 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1154197 : Терминатор / The Terminator (1984) BDRip [H.264] : http://s018.radikal.ru/i509/1707/32/f234b35be2be.jpg
+2021-10-26 09:30:49.573 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1333036 : Танцующий с волками / Dances with Wolves (1990) BDRip [H.264/720p-LQ] [Director's Сut] : https://d.radikal.ru/d00/1910/37/bc6f1fa0bc59.jpg
+2021-10-26 09:30:49.575 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1478236 : Продавец дождя / The Rainmaker (1956) BDRip [MVO] : https://a.radikal.ru/a08/2106/1b/109c13fd9e84.jpg
+2021-10-26 09:30:49.576 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1392216 : Секрет / Le secret (1974) DVDRip [H.264] [VO] : https://a.radikal.ru/a03/2006/73/83ffe20efd44.jpg
+2021-10-26 09:30:49.576 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=281962 : Апокалипсис сегодня / Apocalypse Now (1979/2001) [H.264] BDRip [Redux version] : https://a.radikal.ru/a16/1903/f9/64994a6ef7bd.jpg
+2021-10-26 09:30:49.577 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1258751 : Сияние / The Shining (1980) BDRip [H.264/720p-LQ] : https://d.radikal.ru/d36/1810/38/5d4d07fc0088.jpg
+2021-10-26 09:30:49.577 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1111147 : Плутовство / Хвост виляет собакой / Wag the Dog (1997) WEB-DLRip [H.264/1080р-LQ] : http://funkyimg.com/i/2pJk2.jpg
+2021-10-26 09:30:49.578 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=250808 : Звездные Войны / Star Wars (1977-2005) [H.264] HDTVRip (все части) : http://s001.youpic.su/pictures/1288112400/14f505b617c80f5dcb08207e888b61c5.jpg
+2021-10-26 09:30:49.579 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=767243 : Розенкранц и Гильденстерн мертвы / Rosencrantz &amp; Guildenstern Are Dead (1990) DVDRip : http://i.imgur.com/WazmFJx.jpg
+2021-10-26 09:30:49.579 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1144608 : Неприкасаемые / The Untouchables (1987) BDRip [H.265/1080p-LQ] [MVO] : http://14.2.i.getapic.me/4ajz.jpeg
+2021-10-26 09:30:49.579 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1504662 : Профессионалы / The Professionals (1966) BDRip [H.264] : https://d.radikal.ru/d12/2110/8e/990b1c42cd97.jpg
+2021-10-26 09:30:49.580 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1504591 : Гибель богов / G&#246;tterd&#228;mmerung / La caduta degli dei / The Damned (1969) BDRip [H.264] : https://a.radikal.ru/a13/2110/05/0af63b6104e7.jpg
+2021-10-26 09:30:49.580 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1504019 : Скотт из Антарктики / Scott of the Antarctic (1948) BDRip [H.264] [VO] : https://a.radikal.ru/a31/2110/bc/84f9c541e766.jpg
+2021-10-26 09:30:49.580 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1501106 : Девушка моей мечты / Die Frau meiner Traume (1944) BDRip [H.264] : https://c.radikal.ru/c22/2011/ce/60dd1cf782ca.jpg
+2021-10-26 09:30:49.581 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1501537 : Таггарт / Taggart (1964) BDRip [H.264] [AVO] : https://d.radikal.ru/d15/2110/62/998a363787cb.jpg
+2021-10-26 09:30:49.581 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1503756 : Прекрасная мельничиха / La bella mugnaia (1955) WEB-DLRip [H.264] : https://d.radikal.ru/d20/2110/1a/9d8bce37ad5a.jpg
+2021-10-26 09:30:49.581 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1503814 : Скотт из Антарктики / Scott of the Antarctic (1948) BDRip [VO] : https://i6.imageban.ru/out/2021/10/20/48a626dc772c89802637f17a8eed133a.jpg
+2021-10-26 09:30:49.582 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1503274 : Высокая Сьерра / High Sierra (1941) BDRip [H.264] : https://c.radikal.ru/c43/2110/f5/1cca5d22dd8a.jpg
+2021-10-26 09:30:49.582 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1500684 : Принцесса и пират / The Princess and the Pirate (1944) WEB-DLRip [H.264] : https://b.radikal.ru/b43/2110/be/c375a8e1c4f9.jpg
+2021-10-26 09:30:49.582 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1503116 : Вотрен / Vautrin (1943) BDRip [H.264] [VO] : https://c.radikal.ru/c10/2110/59/88702611cd35.jpg
+2021-10-26 09:30:49.582 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1421024 : Лунный гонщик / Moonraker (1979) BDRip : https://b.radikal.ru/b24/2011/d0/817e7f7fdfe4.jpg
+2021-10-26 09:30:49.583 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1503082 : Наемник / Il mercenario (1968) BDRip [H.264] : https://a.radikal.ru/a05/2110/88/1805d55687b2.jpg
+2021-10-26 09:30:49.583 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=930943 : Профессия: Репортер / Professione: reporter (1975) DVDRip : http://s018.radikal.ru/i513/1508/0b/ad5da70e81e0.jpg
+2021-10-26 09:30:49.583 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=466278 : Флэш Гордон - Ракетный корабль / Flash Gordon Rocket Ship Movie (1938) DVDRip [H.264] : https://c.radikal.ru/c03/2110/d4/8a205112f025.jpg
+2021-10-26 09:30:49.584 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1502910 : Арабские ночи / Arabian Nights (1942) BDRip [H.264] : https://a.radikal.ru/a39/2110/4b/71199a245f73.jpg
+2021-10-26 09:30:49.584 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=238229 : Паническое бегство из Санта-Фе / Santa Fe Stampede (1938) DVDRip : https://c.radikal.ru/c01/2110/73/31e32420fb73.jpg
+2021-10-26 09:30:49.584 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1500384 : Обнажённая шпора / The Naked Spur (1953) BDRip [H.264] [VO] : https://c.radikal.ru/c17/2110/64/8cbab8df3423.jpg
+2021-10-26 09:30:49.585 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=252078 : Плата за страх / Le salaire de la peur (1952) DVDRip [Цветной] : http://i.imgur.com/nPv5Wlh.jpg
+2021-10-26 09:30:49.585 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1502363 : Вечеринка / The Party (1968) BDRip [H.264] : https://a.radikal.ru/a42/2110/d2/f53c07d6f398.jpg
+2021-10-26 09:30:49.585 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1502364 : Вдова Кудер / La veuve Couderc (1971) BDRip [H.264] : https://b.radikal.ru/b41/2110/d2/de73a6a08ea9.jpg
+2021-10-26 09:30:49.585 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1500761 : Первая брачная ночь / La mariee est trop belle (1956) BDRip [H.264] : https://a.radikal.ru/a07/2110/e8/1ee6542ba087.jpg
+2021-10-26 09:30:49.586 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1500034 : Убийства девушек с календаря /  Calendar Girl Murders (1984) BDRip [H.264] : https://a.radikal.ru/a40/2110/da/e18815445ccb.jpg
+2021-10-26 09:30:49.586 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=562820 : Человек в железной маске / The Man in the Iron Mask (1977) DVDRip : http://i44.fastpic.ru/big/2012/1020/b5/ce020ca14c91d40367def8ef5d92eab5.jpg
+2021-10-26 09:30:49.586 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1371833 : Дьявол и десять заповедей / Le Diable et les dix commandements / The Devil and the Ten Commandments (1962) DVDRip [H.264] : https://funkyimg.com/i/33yqS.jpg
+2021-10-26 09:30:49.587 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=493448 : Слишком рискованно / Too Hot to Handle (1938) DVDRip : https://a.radikal.ru/a35/2110/bd/3ec745940f2f.jpg
+2021-10-26 09:30:49.587 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1500952 : Синяя борода / Bluebeard (1972) BDRip [H.264] [USA Transfer] [Limited Edition] : http://s019.radikal.ru/i624/1607/49/88b78a873a98.jpg
+2021-10-26 09:30:49.587 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1500924 : Прогулка по беспутному кварталу / Walk on the Wild Side (1962) BDRip [H.264] : https://d.radikal.ru/d21/2110/6a/53ef480ed7a9.jpg
+2021-10-26 09:30:49.587 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1499380 : Капо / Kapo (1960) BDRip [H.264] [DVO] : https://b.radikal.ru/b43/2109/df/0694a714bea9.jpg
+2021-10-26 09:30:49.588 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1500683 : Трёхгрошовая опера / Die 3 Groschen-Oper (1931) BDRip [H.264] : https://c.radikal.ru/c42/2110/b3/725e19616234.jpg
+2021-10-26 09:30:49.588 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1499372 : Бассейн / La piscine (1969) BDRip [H.264] : https://a.radikal.ru/a27/2110/1e/d64b10b1e1c7.png
+2021-10-26 09:30:49.588 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1500208 : Иметь и не иметь / To Have and Have Not (1944)  BDRip [H.264] : https://d.radikal.ru/d01/2109/b9/7743179caf81.jpg
+2021-10-26 09:30:49.589 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1499548 : Побег в никуда / Ride in the Whirlwind (1966) BDRip [H.264] : https://d.radikal.ru/d20/2110/30/9ecfed74be61.jpg
+2021-10-26 09:30:49.589 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=288647 : Время любить и время умирать / A Time to Love and a Time to Die (1958) DVDRip : https://d.radikal.ru/d36/2110/c4/7051155b8033.jpg
+2021-10-26 09:30:49.589 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1499821 : Негодяи / The Spoilers (1942) BDRip [H.264] : https://d.radikal.ru/d10/2110/16/266a4235e796.jpg
+2021-10-26 09:30:49.589 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1499783 : Женщина и паяц / La femme et le pantin (1958) BDRip [H.264] : https://d.radikal.ru/d21/2110/08/5a5404a4bbc1.jpg
+2021-10-26 09:30:49.590 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1499545 : Огонь на поражение / The Shooting (1966) BDRip [H.264] : https://c.radikal.ru/c38/2110/db/8eeebaae974d.jpg
+2021-10-26 09:30:49.590 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1499500 : Мамочка, нянечка, сыночек и доченька / Mumsy, Nanny, Sonny &amp; Girly (1970) BDRip [H.264] [VO] : https://i1.imageban.ru/out/2021/09/18/892f2737714d01c04eb98c38df4d8216.jpg
+2021-10-26 09:30:49.590 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1499340 : Смеющиеся наследники / Lachende Erben (1933)  BDRip [H.264] [DVO] : https://d.radikal.ru/d32/2110/d3/50c569578e81.jpg
+2021-10-26 09:30:49.590 +05:00 [INF] https://nnmclub.to/forum/viewtopic.php?t=1421315 : Золотой глаз / GoldenEye (1995) BDRip : https://d.radikal.ru/d40/2011/89/63675b5fa64a.jpg
+2021-10-26 09:39:08.903 +05:00 [INF] Parsing started
+2021-10-26 09:39:09.421 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:39:09.426 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:39:23.883 +05:00 [INF] Parsing started
+2021-10-26 09:39:24.187 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:39:24.187 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:39:24.270 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:39:27.344 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:39:27.431 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:39:30.506 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:39:30.584 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:39:33.663 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:39:33.738 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:42:27.677 +05:00 [INF] Parsing started
+2021-10-26 09:42:27.788 +05:00 [INF] Parsing completed
+2021-10-26 09:42:28.170 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:42:28.176 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:42:42.656 +05:00 [INF] Parsing started
+2021-10-26 09:42:42.657 +05:00 [INF] Parsing completed
+2021-10-26 09:42:42.889 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:42:42.889 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:42:42.992 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:42:46.068 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:42:46.142 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:22.571 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:44:22.571 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:44:22.646 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:44:22.646 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:44:22.675 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:25.251 +05:00 [INF] Parsing completed
+2021-10-26 09:44:25.787 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:25.863 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:28.941 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:29.012 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:29.704 +05:00 [INF] Parsing completed
+2021-10-26 09:44:32.087 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:32.160 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:35.254 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:35.327 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:37.376 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:44:37.377 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:44:38.409 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:38.479 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:39.350 +05:00 [INF] Parsing completed
+2021-10-26 09:44:40.455 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:41.559 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:41.632 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:43.532 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:44.711 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:44.783 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:46.604 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:47.858 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:47.930 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:49.679 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:51.014 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:51.086 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:52.683 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:44:52.684 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:44:53.057 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:54.169 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:54.244 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:54.991 +05:00 [INF] Parsing completed
+2021-10-26 09:44:55.755 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:56.126 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:57.322 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:57.393 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:58.827 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:44:59.197 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:45:00.469 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:45:00.544 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:45:01.895 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:45:02.266 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:46:36.587 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:46:36.589 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:46:36.660 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:46:36.660 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:46:36.696 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:46:39.429 +05:00 [INF] Parsing completed
+2021-10-26 09:46:39.769 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:46:39.850 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:46:40.168 +05:00 [INF] Parsing completed
+2021-10-26 09:46:42.927 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:46:43.010 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:46:46.084 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:46:46.159 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:46:49.230 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:46:49.312 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:46:51.449 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 09:46:51.450 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 09:46:52.388 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:46:52.466 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:46:54.014 +05:00 [INF] Parsing completed
+2021-10-26 09:46:54.526 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:46:55.553 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 09:46:55.633 +05:00 [ERR] Telegram API Error:
+[409]
+Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+2021-10-26 10:04:08.854 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 10:04:08.987 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 10:06:58.968 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 10:06:59.064 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 10:07:01.840 +05:00 [INF] Parsing completed
+2021-10-26 10:07:13.754 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 10:07:13.755 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 10:07:15.548 +05:00 [INF] Parsing completed
+2021-10-26 10:07:28.800 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 10:07:28.801 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 10:07:28.922 +05:00 [INF] Received a '11' message in chat 311189536.
+2021-10-26 10:07:31.296 +05:00 [INF] Parsing completed
+2021-10-26 10:07:43.935 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 10:07:43.936 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 10:07:45.951 +05:00 [INF] Parsing completed
+2021-10-26 10:08:50.085 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 10:08:50.169 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 10:08:55.843 +05:00 [INF] Parsing completed
+2021-10-26 10:09:04.665 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 10:09:04.666 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 10:09:08.484 +05:00 [INF] Parsing completed
+2021-10-26 10:09:37.275 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 10:09:37.335 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 10:09:40.468 +05:00 [INF] Parsing completed
+2021-10-26 10:10:15.273 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 10:10:15.346 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 10:10:17.952 +05:00 [INF] Parsing completed
+2021-10-26 10:10:30.131 +05:00 [INF] Start listening for @Old_Foreign_Films_bot
+2021-10-26 10:10:30.131 +05:00 [INF] Parse url: https://nnmclub.to/forum/viewforum.php?f=319
+2021-10-26 10:10:32.607 +05:00 [INF] Parsing completed

@@ -14,12 +14,12 @@ using Telegram.Bot.Types.Enums;
 
 namespace CinemaBot.Services.Services
 {
-    public class TelegramService : ITelegramService
+    public class TelegramService 
     {
         private readonly ILogger _log;
         private ITelegramBotClient _botClient = null;
         private readonly IConfiguration _config;
-        private CancellationTokenSource _cts;
+        public CancellationTokenSource Cts{ get; private set; }
 
         public TelegramService(ILogger log, IConfiguration configuration)
         {
@@ -35,10 +35,10 @@ namespace CinemaBot.Services.Services
             _botClient = new TelegramBotClient(_config["TelegramToken"]);
             var me = await _botClient.GetMeAsync();
 
-            _cts = new CancellationTokenSource();
+            Cts = new CancellationTokenSource();
             _botClient.StartReceiving(
                 new DefaultUpdateHandler(HandleUpdateAsync, HandleErrorAsync),
-                _cts.Token);
+                Cts.Token);
 
             _log.Information("Start listening for @{0}", me.Username);
             return _botClient;

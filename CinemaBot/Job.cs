@@ -20,7 +20,6 @@ namespace CinemaBot
 
         public void Run()
         {
-            _logger.Information("Parsing started");
             string[] urls = _config.GetSection("urls").Get<string[]>();
             try
             {

@@ -31,9 +31,9 @@ namespace CinemaBot.Services.Services
         private readonly int[] _exceptionIds;
         private const int MaxCount = 3;
         private readonly IUrlRepository _urlRepository;
-        private readonly ITelegramService _telegram;
+        private readonly TelegramService _telegram;
 
-        public ParserService(ILogger log, IConfiguration configuration, IMapper mapper, ITelegramService telegram)
+        public ParserService(ILogger log, IConfiguration configuration, IMapper mapper, TelegramService telegram)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
@@ -59,21 +59,24 @@ namespace CinemaBot.Services.Services
 
         public async void Parser(string url)
         {
+            await _telegram.GetBotClientAsync();
+            
             int[] ids = MainPageParser(url);
-
             var resultIds = await CheckIds(ids);
-
+            
             if (resultIds.Length != 0)
             {
                 List<UrlModel> links = await SecondPagesParser(resultIds);
                 
                 SaveToLog(links);
-                
-                await _telegram.GetBotClientAsync();
+
                 await _telegram.SendMessageMovies(links);
 
                 await SaveUrls(links);
             }
+
+            _telegram.Cts.Cancel();
+            _log.Information("Parsing completed");
         }
 
         private int[] MainPageParser(string url)
