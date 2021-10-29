@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using CinemaBot.Models;
-using CinemaBot.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Telegram.Bot;
@@ -49,7 +48,7 @@ namespace CinemaBot.Services.Services
             var ErrorMessage = exception switch
             {
                 ApiRequestException apiRequestException =>
-                    $"Telegram API Error:\n[{apiRequestException.ErrorCode}]\n{apiRequestException.Message}",
+                    $"Telegram API Error: [{apiRequestException.ErrorCode}] {apiRequestException.Message}",
                 _ => exception.ToString()
             };
 

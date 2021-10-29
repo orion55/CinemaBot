@@ -45,7 +45,9 @@ namespace CinemaBot.Services.Services
                 .UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
                 .Options;
             ApplicationDbContext context = new ApplicationDbContext(contextOptions);
+            context.Database.Migrate();
             _urlRepository = new UrlRepository(context);
+            
 
             _useProxy = ToBoolean(configuration["useProxy"]);
             _exceptionIds = configuration.GetSection("exceptionIds").Get<int[]>();

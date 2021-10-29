@@ -32,9 +32,10 @@ namespace CinemaBot
 
         public Startup()
         {
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+            var configurationPath = Path.Combine(Directory.GetCurrentDirectory(), $"appsettings.{environment}.json");
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
+                .AddJsonFile(configurationPath)
                 .AddJsonFile("config.json");
 
             _configuration = builder.Build();
@@ -97,7 +98,7 @@ namespace CinemaBot
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IParserService parserService,
-            IRecurringJobManager recurringJobManager
+            IRecurringJobManager recurringJobManager, IBackgroundJobClient backgroundJobClient
         )
         {
             if (env.IsDevelopment())
@@ -129,8 +130,8 @@ namespace CinemaBot
             });
 
             Job jobscheduler = new Job(Logger, _configuration, parserService);
-            // backgroundJobClient.Enqueue(() => jobscheduler.Run());
-            recurringJobManager.AddOrUpdate("Runs Every 1 Min", () => jobscheduler.Run(), "0/1 * * * * *");
+            backgroundJobClient.Enqueue(() => jobscheduler.Run());
+            // recurringJobManager.AddOrUpdate("Runs Every 1 Min", () => jobscheduler.Run(), "0/1 * * * * *");
         }
     }
 }
